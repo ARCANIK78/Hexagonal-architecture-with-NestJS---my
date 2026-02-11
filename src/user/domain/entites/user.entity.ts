@@ -1,4 +1,5 @@
 import { Email } from "../value-objects/email.vo";
+import { Password } from "../value-objects/password.vo";
 import { UserId } from "../value-objects/user-Id.vo";
 
 export class User{
@@ -6,15 +7,16 @@ export class User{
     private readonly id: UserId,
     private name: string,
     private email: Email,
+    private password: Password,
     private readonly createAt: Date,
     private updateAt: Date,
   ){}
-  static create(name: string, email: string){
+  static create(name: string, email: string, password:string){
     if(!name || name.trim().length < 2){
       throw new Error('Name must be at  least 2 characters long');
     }
     return new User(
-      new UserId, name.trim(), new Email(email), new Date, new Date,
+      new UserId, name.trim(), new Email(email), new Password(password), new Date, new Date,
     )
   }
   getId(): UserId{
@@ -29,6 +31,9 @@ export class User{
   getCreateAt(): Date{
     return this.createAt;
   }
+  getPassword(): Password{
+    return this.password;
+  }
   getUpdateAt(): Date{
     return this.updateAt;
   }
@@ -41,6 +46,10 @@ export class User{
   }
   updateEmail(email: string){
     this.email = new Email(email);
+    this.updateAt = new Date();
+  }
+  updatePassword(password: string){
+    this.password = new Password(password);
     this.updateAt = new Date();
   }
   getAccountAge(): number{
