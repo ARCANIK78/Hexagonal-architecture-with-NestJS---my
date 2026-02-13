@@ -12,13 +12,13 @@ export class CreateUserUseCase{
   constructor(@Inject(USER_REPOSITORY)
              private readonly userRepository: UserRepositoryPort){}
   async execute(dto: CreateUserDto): Promise<User>{
-  const existingUser = await this.userRepository.findByEmail(dto.email);
-  if(existingUser){
-    throw new Error("User with this email already exists.")
-  }
-  const user = User.create(dto.name, dto.email, dto.password);
-  const savedUser = await this.userRepository.save(user);
-  return savedUser
+    const existingUser = await this.userRepository.findByEmail(dto.email);
+    if(existingUser){
+      throw new Error("User with this email already exists.")
+    }
+    const user = User.create(dto.name, dto.email, dto.password);
+    const savedUser = await this.userRepository.save(user);
+    return savedUser
   }
 }
 

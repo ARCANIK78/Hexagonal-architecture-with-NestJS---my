@@ -6,7 +6,7 @@ import { apiReference } from '@scalar/nestjs-api-reference';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-  .setTitle("Mi Api")
+  .setTitle("me-api")
   .setDescription('Mi Documentation me api')
   .setVersion('1.0')
   .build()
